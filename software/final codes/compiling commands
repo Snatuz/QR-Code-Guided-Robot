@@ -1,0 +1,4 @@
+compilar main.cpp: g++ -O2 main.cpp -o main -lpigpio -lpthread -lrt
+
+compilar qrcode_reader.cpp: g++ -std=c++17 -Wall -O2 qrcode_reader.cpp -o qrcode_reader \
+$(pkg-config --cflags --libs opencv4)

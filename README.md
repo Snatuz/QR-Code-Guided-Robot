@@ -508,21 +508,17 @@ Passo 4: "E" encontrado  → exit(0)
 ```
 1. Reseta qr_code_data = "empty"
 2. Reseta distance_counter = 0
-3. Loop: enquanto distance_counter < 171 E qr_code_data == "empty":
+3. Loop: enquanto qr_code_data == "empty":
    └─ chama get_qrcode() e armazena resultado
-4. Se distance_counter >= 171:
-   └─ stop(), imprime aviso, exit(0)  ← QR não encontrado após ~171 ticks
-5. Imprime o QR Code lido
-6. stop()
-7. Aguarda 1 segundo (usleep(1000000))
-8. splitString(qr_code_data) → vetor de comandos
-9. processarComandos(comandos)
-10. return 0
+4. Imprime o QR Code lido
+5. stop()
+6. Aguarda 1 segundo (usleep(1000000))
+7. splitString(qr_code_data) → vetor de comandos
+8. processarComandos(comandos)
+9. return 0
 ```
 
-**Limite de 171 ticks:** O valor `171` representa a quantidade máxima de ticks que o robô aguarda enquanto tenta ler um QR Code. Se o marcador não for encontrado dentro desse limite (equivalente a aproximadamente uma volta completa), o programa é encerrado.
-
-> **Observação:** O trecho `spin(-999)` que giraria o robô durante a busca está **comentado** na versão atual. Isso significa que na versão do arquivo `main.cpp` enviado, o robô fica **parado** enquanto tenta ler o QR, diferentemente da versão do TCC onde ele girava durante a busca.
+> **Observação:** O loop de busca é **infinito** — o robô aguarda indefinidamente até que um QR Code válido seja detectado. Não há timeout nem encerramento automático por ausência de leitura.
 
 ---
 
@@ -576,7 +572,7 @@ main() inicia
     │
     └─ QR_search():
         │
-        ├─ Aguarda QR Code:
+        ├─ Aguarda QR Code (loop infinito):
         │   └─ get_qrcode():
         │       ├─ system("./qrcode_reader")
         │       │   └─ [subprocesso]:
@@ -630,10 +626,10 @@ O conteúdo do QR Code é uma string de valores inteiros separados por vírgula,
 |---|---|---|
 | 1 tick do encoder ≈ | 1 cm de deslocamento | Calculado: diâmetro ~20 cm, 40 ticks/volta → π×20/40 ≈ 1,57 cm/tick (aproximado para 1 cm/tick no código) |
 | 29 ticks ≈ | 90° de rotação | Determinado empiricamente |
-| 1 tick em rotação ≈ | 3° | Calculado a partir dos testes (360°/29 ticks ≈ 12,4°, mas o código usa 3° como referência para `spin()`) |
+| 360° de rotação ≈ | 140 ticks (prático) | Teórico seria 29 × 4 = 116 ticks, porém imprecisões mecânicas resultam em ~140 ticks na prática |
+| 1 tick em rotação ≈ | 3° | Valor de referência utilizado no código para a função `spin()` |
 | PWM para frente reto | EN1=900, EN2=920 | Calibrado empiricamente para compensar diferença entre motores |
 | PWM para rotação | EN2=900 | Calibrado empiricamente |
-| Limite de busca de QR | 171 ticks | Equivale a aproximadamente uma volta completa do robô |
 
 ---
 

@@ -1,1 +1,0 @@
-# TCC---plataforma-movel-programavel

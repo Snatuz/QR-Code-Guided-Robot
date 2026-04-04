@@ -1,5 +1,0 @@
-1° - fazer um simples robô que consegue se mover para frente,
-para tras e para os lados. Ele não precissa usar sensores de 
-começo só se mover e conseguirmos controlar seu moviento. Aqui
-abro também a possibilidade de usar um app para definir onde
-o robô ira.

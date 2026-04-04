@@ -1,9 +1,0 @@
-Aqui coloco algumas coisas que petguntei ao chat gpt
-referente ao controle do nosso robô e como fazer isso
-por meio de contas matemáticas. A boa notícia é que
-não prescisamos aprender conteúdos de matemática ou
-física de ensino superior, só o ensino médio é suficiente
-. Só prescisamos entender por cima como funciona essas equa-
-ções e como usa-las para facilitar nossa vida:
-
-https://chatgpt.com/share/68e46820-a0c4-8007-9695-6b800cbf6f25

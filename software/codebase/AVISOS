@@ -1,0 +1,2 @@
+O arquivo "PID" é uma versão antiga de um projeto de implementação de um controle PID. O projeto foi descontinuado por limitações técnicas relacionadas a arquitetura do robô.
+O arquivo é mantido apenas por referência didática, ainda que, mesmo cancelado, o PID teve seu desenvolvimento além do disposto no arquivo PID.cpp

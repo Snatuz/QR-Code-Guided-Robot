@@ -1,14 +1,1 @@
-#excluindo todos os executaveis e pasta de executaveis
-#do versionamento, mantendo assim só o sourece e o build.
 
-*.a
-
-*.o
-
-*.exe
-
-software/codebase/compile_commands.json
-
-software/guia-bibliotecas/.obsidian
-
-software/codebase/bin/

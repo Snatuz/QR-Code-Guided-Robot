@@ -14,7 +14,6 @@
 
 void stop() {
   
-	// garantindo que os motores estarão parados
   gpioWrite(EN1, 0);
   gpioWrite(EN2, 0);
   gpioPWM(IN1, 0);
@@ -24,7 +23,7 @@ void stop() {
   gpioSetMode(IN1, PI_OUTPUT);
   gpioSetMode(IN2, PI_OUTPUT);
   gpioSetMode(IN3, PI_OUTPUT);
-  gpioSetMode(IN4, PI_OUTPUT);  // definir todos os pinos como "NAO PWM's"
+  gpioSetMode(IN4, PI_OUTPUT);  
   
   }
 
@@ -57,11 +56,10 @@ void PID() {
   left_motor->error = setpoint - left_motor->velocity;
   right_motor->error = setpoint - right_motor->velocity;
 
-//caucula o derivativo a ser corrigido.
+
   left_motor->derivative = (left_motor->error - left_motor->previous_error) / dt; //caucula o derivativo a ser corrigido.
   right_motor->derivative = (right_motor->error - right_motor->previous_error) / dt;
 
-//incluindo a parte integral
   left_motor->integral += left_motor->error * dt;
   right_motor->integral += right_motor->error * dt;
 
@@ -69,12 +67,13 @@ void PID() {
   left_motor->correction = (KP * left_motor->error) + (KI * left_motor->integral) + (KD * left_motor->derivative);
   right_motor->correction = (KP * right_motor->error) + (KI * right_motor->integral) + (KD * right_motor->derivative);
   
-//aplica a correcao ao PWM
+
   left_motor->PWM = left_motor->previous_PWM + left_motor->correction;
   right_motor->PWM = right_motor->previous_PWM + right_motor->correction;
   
-//verifica os limites do PWM
-  if(left_motor->PWM > 1000)
+//verificar limites do PWM
+
+	if(left_motor->PWM > 1000)
     left_motor->PWM = 1000;
   
   if(left_motor->PWM < 0)
@@ -86,7 +85,7 @@ void PID() {
   if(right_motor->PWM < 0)
     right_motor->PWM = 0;
 
-//aplica o PWM nos motores
+
   gpioPWM(IN1, left_motor->PWM);
   gpioPWM(IN3, right_motor->PWM); // isso considera que PID() foi chamada enquanto o robo anda para frente. 
 
